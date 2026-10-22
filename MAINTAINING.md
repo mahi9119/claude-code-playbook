@@ -60,8 +60,8 @@ footers.
 
 ## D-07 Site deployment
 
-- Source: every `site/*.html` is a page fragment (`index.html` is the playbook, `start.html` the
-  beginner guide). Shared styles live once in `site/base.css`; the diagrams live in `assets/*.svg`.
+- Source: every `site/*.html` is a page fragment. `index.html` is the home page, where the reader
+  picks a path; `playbook.html` is the full write-up; `start.html` is the beginner guide. Shared styles live once in `site/base.css`; the diagrams live in `assets/*.svg`.
 - Build: `node scripts/build-site.mjs` writes `_site/<page>.html`. It inlines `base.css` and the
   diagrams, so the diagrams follow the page's light and dark theme. `_site/` is gitignored.
 - The beginner guide walks through `starter/`. If a starter file changes, check the guide's copy
@@ -80,12 +80,13 @@ gh workflow run "Publish site" -R mahi9119/claude-code-playbook
 
 ## D-08 Refreshing the numbers
 
-The numbers appear in four places. Update all four together, and update the "measured on" date:
+The numbers appear in five places. Update all five together, and update the "measured on" date:
 
 | Where | What |
 |-------|------|
 | `README.md` | "The numbers" table and its date line |
-| `site/index.html` | The stats row and the note under it |
+| `site/playbook.html` | The stats row and the note under it |
+| `site/index.html` | The proof line under the two cards |
 | `assets/cover.svg` | Four stats under the title |
 | `assets/the-loop.svg` | "46 of 80 lessons" in the footer line |
 

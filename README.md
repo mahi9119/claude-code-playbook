@@ -12,7 +12,8 @@ agents, hooks, guard scripts and incident stories we built while developing a mu
 SaaS for billing, contracts and compliance. Everything here is generic and ready to copy into your
 own project.
 
-**Live write-up:** [mahi9119.github.io/claude-code-playbook](https://mahi9119.github.io/claude-code-playbook/)
+**Website:** [mahi9119.github.io/claude-code-playbook](https://mahi9119.github.io/claude-code-playbook/), or go straight to the
+[full playbook](https://mahi9119.github.io/claude-code-playbook/playbook.html).
 
 **New to Claude Code?** Start with the [beginner guide](https://mahi9119.github.io/claude-code-playbook/start.html):
 six steps from an empty project to rules, a lessons log, a first guard, plans and reviews, using
@@ -122,7 +123,8 @@ claude-code-playbook/
 ├── stories/
 │   └── README.md            Twelve incidents and the guards they produced
 ├── site/
-│   ├── index.html           The write-up, served by GitHub Pages
+│   ├── index.html           Home: choose the beginner guide or the playbook
+│   ├── playbook.html        The full write-up
 │   └── start.html           The beginner guide
 └── MAINTAINING.md           Decisions, content rules, and how to refresh the numbers and site
 ```

@@ -1,181 +1,97 @@
 <title>Claude Code Playbook</title>
-<meta name="description" content="How we shipped a production-grade financial platform with Claude Code, and the guardrails that made it safe.">
+<meta name="description" content="A field-tested method for building production software with Claude Code. New to Claude Code? Start from zero. Already using it? Read the full playbook.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <!--css:base-->
+<style>
+  /* Home: one question, two large choice cards that are each a single link, then a line of proof. */
+  .home .frame { padding-block: 80px 24px; }
+  .home h1 { font-size: clamp(38px, 5.4vw, 60px); max-width: 18ch; }
+  .home .lede { max-width: 54ch; }
+
+  .choices { margin-top: 44px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .choice { min-width: 0; display: flex; flex-direction: column; gap: 14px; padding: 30px 30px 26px; border-radius: 18px; border: 1px solid var(--line); background: var(--card); color: var(--ink); text-decoration: none; }
+  .choice:hover { border-color: var(--clay); text-decoration: none; }
+  .choice:focus-visible { outline-offset: 4px; border-radius: 18px; }
+  .choice .who { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); }
+  .choice h2 { font-size: clamp(28px, 3vw, 36px); }
+  .choice p { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.55; }
+  .choice ul { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px; }
+  .choice li { display: flex; gap: 10px; align-items: baseline; }
+  .choice li::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--clay); transform: translateY(-2px); }
+  .choice .snippet { font-family: var(--font-mono); font-size: 13.5px; background: var(--term); color: var(--tink); border-radius: 10px; padding: 12px 16px; overflow-x: auto; white-space: nowrap; }
+  .choice .snippet .p { color: var(--tmuted); }
+  .choice .snippet .no { color: var(--clay); }
+  .choice .snippet .ok { color: var(--ok); }
+  .choice .go { margin-top: auto; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; font-weight: 600; font-size: 16px; color: var(--clay); border-top: 1px solid var(--line); }
+  .choice .go span { font-size: 22px; line-height: 1; }
+  .choice.primary { background: var(--clayfill); border-color: transparent; }
+  .choice.primary:hover { border-color: var(--clay); }
+
+  .proof { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 14px; color: var(--muted); }
+  .proof b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .choice { transition: border-color 0.15s, transform 0.15s; }
+    .choice:hover { transform: translateY(-2px); }
+  }
+</style>
 <!--/head-->
 
 <header class="bar">
   <div class="frame">
-    <a class="mark" href="#top">Claude Code <span>Playbook</span></a>
+    <a class="mark" href="./" aria-current="page">Claude Code <span>Playbook</span></a>
     <nav aria-label="Links">
       <a href="start.html">Start here</a>
-      <a href="#method">Method</a>
-      <a href="#stories">Stories</a>
+      <a href="playbook.html">Playbook</a>
       <a href="https://github.com/mahi9119/claude-code-playbook">GitHub</a>
     </nav>
   </div>
 </header>
 
-<main id="top">
-  <section class="hero">
+<main id="top" class="home">
+  <section>
     <div class="frame">
-      <div>
-        <p class="eyebrow">A field report from six months of building</p>
-        <h1>Guards over reminders.</h1>
-        <p class="lede">How we shipped a production-grade financial platform with Claude Code, and the guardrails that made it safe to trust.</p>
-        <p class="byline">By <strong>Mahendar Mali</strong> · learned while building a multi-tenant B2B SaaS for billing, contracts and compliance</p>
-      </div>
-      <div class="term" role="img" aria-label="A preflight run where the plan-drift guard fails and blocks the ship because a verification item is still unchecked">
-        <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div><span class="p">$</span> pnpm preflight</div>
-        <div><span class="ok">✓</span> lint</div>
-        <div><span class="ok">✓</span> typecheck</div>
-        <div><span class="ok">✓</span> schema-drift</div>
-        <div><span class="no">✗</span> plan-drift</div>
-        <span class="dim">phase 186 is Completed but 1 Verification item is still unchecked:</span>
-        <span class="q">"stepper shows the new milestone"</span>
-        <div style="margin-top:12px"><span class="no">Ship blocked.</span></div>
-      </div>
-    </div>
-  </section>
+      <p class="eyebrow">Claude Code Playbook</p>
+      <h1>Where are you starting from?</h1>
+      <p class="lede">A field-tested method for building production software with Claude Code: written rules, a log of past mistakes, checks that block repeats, and reviews before every ship.</p>
 
-  <section class="stats" aria-label="Project numbers">
-    <div class="frame">
-      <dl>
-        <div><dt>commits since 17 Apr 2026</dt><dd>956</dd></div>
-        <div><dt>lines of TypeScript</dt><dd>150k</dd></div>
-        <div><dt>lines of tests</dt><dd>45k</dd></div>
-        <div><dt>planned phases</dt><dd>209</dd></div>
-        <div><dt>bugs fixed of 433 filed</dt><dd>316</dd></div>
-        <div><dt>lessons, 46 now guarded</dt><dd>80</dd></div>
-      </dl>
-      <p class="note">Measured against the private repository on 22 October 2026. The product is deployed and pre-launch, with no paying clients yet. 162 database migrations, 30 guard tests, 30 decision records, 22 project skills.</p>
-    </div>
-  </section>
+      <div class="choices">
+        <a class="choice primary" href="start.html">
+          <span class="who">New to Claude Code</span>
+          <h2>Start from zero</h2>
+          <p>Set up the core of the playbook in your own project, one small step at a time.</p>
+          <div class="snippet" aria-hidden="true"><span class="p">$</span> cp starter/CLAUDE.md ./CLAUDE.md</div>
+          <ul>
+            <li>Six short steps, about an hour</li>
+            <li>Starter files you copy as they are</li>
+            <li>A check after every step, so you know it worked</li>
+          </ul>
+          <span class="go">Start here <span aria-hidden="true">→</span></span>
+        </a>
 
-  <section class="block">
-    <div class="frame">
-      <div class="read">
-        <h2>The product is the evidence. The method is the argument.</h2>
-        <p>The product is a B2B SaaS that handles invoices, contracts and compliance for its customers. Money is computed with exact decimals, every tenant's data is isolated by the database itself, and every financial change writes an audit row. That is a lot of rules for a small team to hold in their heads, and an AI agent holds none of them between sessions.</p>
-        <p>So we stopped relying on anyone remembering. Claude Code wrote most of the keystrokes. We wrote the rules it works under, the scripts that enforce them, and the reviews that check its work. This page is about that layer.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="method">
-    <div class="frame">
-      <div class="read">
-        <p class="eyebrow">The one idea</p>
-        <h2>A rule that lives only in a document holds until the day it matters.</h2>
-        <p class="sub">Every mistake in the project goes through the same four steps, and the fourth is what makes the rest stick.</p>
-      </div>
-      <figure>
-        <div class="diagram"><!--svg:the-loop--></div>
-        <figcaption>The promotion rule: a lesson either names the mechanical guard that now enforces it, or says "judgment" and explains why none is possible.</figcaption>
-      </figure>
-      <ol class="steps">
-        <li><b>Incident</b><span>Something breaks, or nearly does. It gets a number in the tracker before anyone touches a file.</span></li>
-        <li><b>Lesson</b><span>Written into the lessons log in the same turn, with the guard named, or the word "judgment" and the reason.</span></li>
-        <li><b>Guard</b><span>A test, script or hook that fails loudly on a repeat. Proven red on the broken code before it is trusted.</span></li>
-        <li><b>Recall</b><span>A session-start hook puts the lesson index in front of every new Claude session, so even unguarded lessons are read.</span></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="block">
-    <div class="frame">
-      <div class="read">
-        <p class="eyebrow">The method</p>
-        <h2>Nine rules, each with the incident that made it.</h2>
-        <p class="sub">The reason is written next to every rule in the project constitution, so nobody tidies a rule away without knowing why it exists.</p>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>#</th><th>Rule</th><th>The incident behind it</th></tr></thead>
-          <tbody>
-            <tr><td class="n">01</td><td class="r">A written constitution that every session loads</td><td class="why">Making the same correction in session after session</td></tr>
-            <tr><td class="n">02</td><td class="r">Classify every task first: Bug, Change Request or Plan</td><td class="why">"Simple" edits to auth and schema files that were not simple</td></tr>
-            <tr><td class="n">03</td><td class="r">Plans touching money, dates or concurrency carry a Boundary and Invariant Table</td><td class="why">A month-end date overflow shipped even though the plan named the risk, in a sentence</td></tr>
-            <tr><td class="n">04</td><td class="r">Verification items are checkboxes, and a guard blocks shipping with one unticked</td><td class="why">A phase shipped without its approved UI while its own checklist named the miss</td></tr>
-            <tr><td class="n">05</td><td class="r">Choose the cheapest model that handles what is still unknown</td><td class="why">The top model used about half the spend on an eighth of the turns, mostly on work already specified</td></tr>
-            <tr><td class="n">06</td><td class="r">Two-tier review before every ship, with a fresh-context reviewer for risky diffs</td><td class="why">Two internal sweeps missed five bugs one independent reviewer found</td></tr>
-            <tr><td class="n">07</td><td class="r">One scripted release path, and a hook that blocks the agent from committing</td><td class="why">Migrations that reached main and silently never reached production</td></tr>
-            <tr><td class="n">08</td><td class="r">Six-point vetting of every tool before install, reading the code on disk</td><td class="why">Any skill or server that reads the repo can carry the code off the machine</td></tr>
-            <tr><td class="n">09</td><td class="r">Tracking docs open with a summary table, linted for alignment</td><td class="why">Detail-only trackers stop being read, and unread trackers drift</td></tr>
-          </tbody>
-        </table>
+        <a class="choice" href="playbook.html">
+          <span class="who">Already using Claude Code</span>
+          <h2>Read the playbook</h2>
+          <p>The full method behind a production B2B SaaS, and the incidents that shaped every rule.</p>
+          <div class="snippet" aria-hidden="true"><span class="no">✗</span> plan-drift <span class="p">·</span> <span class="no">Ship blocked.</span></div>
+          <ul>
+            <li>Nine rules and the incident behind each</li>
+            <li>Twelve incident stories and the guards they produced</li>
+            <li>Templates, skills, reviewer agents and hooks</li>
+          </ul>
+          <span class="go">Open the playbook <span aria-hidden="true">→</span></span>
+        </a>
       </div>
 
-      <figure>
-        <div class="diagram"><!--svg:task-tiers--></div>
-        <figcaption>Rule 2. The test for a Change Request is whether any decision is left for the agent to make, not how small the diff is.</figcaption>
-      </figure>
-
-      <figure>
-        <div class="diagram"><!--svg:review-gates--></div>
-        <figcaption>Rules 6 and 7. A reviewer handed the plan's hostile inputs as a hunt list finds what a reviewer choosing its own examples does not: it picks friendly ones.</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="block" id="stories">
-    <div class="frame">
-      <div class="read">
-        <p class="eyebrow">Incident stories</p>
-        <h2>Twelve failures that generalize.</h2>
-        <p class="sub">Picked from 80 logged lessons because none of them is specific to one product or industry. The full write-ups are in the repo.</p>
-      </div>
-      <div class="stories">
-        <article class="story"><span class="id">S-01 · Planning</span><h3>The checklist that could not be checked</h3><p>A numbered prose list has no state. A phase shipped missing the deliverable its own item 10 named.</p><span class="chip">Plan-drift guard</span></article>
-        <article class="story"><span class="id">S-02 · Release</span><h3>Merged is not migrated</h3><p>Hand-written security migrations never matched the release script's trigger, so production never got them.</p><span class="chip">Trigger pinned by test</span></article>
-        <article class="story"><span class="id">S-03 · Testing</span><h3>A fifth of the suite never ran</h3><p>51 test files skipped on every run because the env file silently failed to load. The suite still said green.</p><span class="chip judgment">judgment</span></article>
-        <article class="story"><span class="id">S-04 · Testing</span><h3>The test that could not fail</h3><p>At round numbers, the right formula and the wrong one gave the same answer. Three rows, all read as rigorous.</p><span class="chip">Wrong implementations kept in the test</span></article>
-        <article class="story"><span class="id">S-05 · Security</span><h3>A coverage check that could not see join tables</h3><p>"Every table with a tenant column" missed tables scoped only through a parent key.</p><span class="chip">Population defined by foreign key</span></article>
-        <article class="story"><span class="id">S-06 · Guards</span><h3>The exemption nobody tested</h3><p>The guard for this exact bug class existed. Its skip branch had never been proven against anything.</p><span class="chip">Exemption proven red</span></article>
-        <article class="story"><span class="id">S-07 · Consistency</span><h3>Convergence without a guard decays</h3><p>71 files drifted back to the old button pattern after a cleanup that shipped no guard.</p><span class="chip">Guard per pattern, same commit</span></article>
-        <article class="story"><span class="id">S-08 · State machines</span><h3>The rename that compiled clean</h3><p>A hardcoded status in an update still type-checked after the rename, and silently matched zero rows.</p><span class="chip">Literal guard</span></article>
-        <article class="story"><span class="id">S-09 · Data safety</span><h3>Archiving deleted data it never mentioned</h3><p>A cascading foreign key removed rows in a table the archive code had never heard of.</p><span class="chip">Dependents declared</span></article>
-        <article class="story"><span class="id">S-10 · Planning</span><h3>Two approved decisions that contradicted each other</h3><p>Each read fine alone. The code silently picked one and made the other unreachable.</p><span class="chip judgment">judgment</span></article>
-        <article class="story"><span class="id">S-11 · Agents</span><h3>"A subagent did it"</h3><p>A confident accusation built on a clean git status. A second session sharing the folder was the real explanation.</p><span class="chip">List live sessions first</span></article>
-        <article class="story"><span class="id">S-12 · Communication</span><h3>Measure reach, never infer it</h3><p>"Two files" changed 176 usages. "Everywhere" reached 14 files. Neither was counted before it was said.</p><span class="chip judgment">judgment</span></article>
-      </div>
-      <p class="sub" style="margin-top:22px"><a href="https://github.com/mahi9119/claude-code-playbook/tree/main/stories">Read all twelve in full on GitHub</a></p>
-    </div>
-  </section>
-
-  <section class="block" id="use">
-    <div class="frame">
-      <div class="read">
-        <p class="eyebrow">Use it</p>
-        <h2>Everything here is generic and MIT licensed.</h2>
-        <p class="sub">Copy the constitution, cut it down to your project, and add guards as your own incidents earn them. Do not install every guard on day one.</p>
-        <p class="sub"><strong style="color:var(--ink)">New to Claude Code?</strong> <a href="start.html">Start here</a>: six steps from an empty project to rules, a lessons log, a first guard, plans and reviews, in about an hour.</p>
-      </div>
-      <div class="tree" aria-label="Repository layout">claude-code-playbook/
-├── templates/   <span class="c">CLAUDE.md, plan, lessons and decisions templates</span>
-├── skills/      <span class="c">new-plan, file-bug, close-phase, overnight-close</span>
-├── agents/      <span class="c">tier2-reviewer, migration-reviewer, invariant-scanner</span>
-├── hooks/       <span class="c">session-start lesson injection, git-write block</span>
-├── guards/      <span class="c">check-plan-drift, check-doc-tables</span>
-└── stories/     <span class="c">twelve incidents and their guards</span></div>
-      <div class="cmds">
-        <div class="cmd"><code id="cmd-clone">git clone https://github.com/mahi9119/claude-code-playbook.git</code><button type="button" data-copy="cmd-clone">Copy</button></div>
-        <div class="cmd"><code id="cmd-claude">cp claude-code-playbook/templates/CLAUDE.md ./CLAUDE.md</code><button type="button" data-copy="cmd-claude">Copy</button></div>
-        <div class="cmd"><code id="cmd-lessons">cp claude-code-playbook/templates/lessons.md ./docs/lessons.md</code><button type="button" data-copy="cmd-lessons">Copy</button></div>
-      </div>
-      <div class="read">
-        <h3 style="margin-top:44px;font-size:24px">Principles that hold it together</h3>
-        <ul class="principles">
-          <li><strong>Blocking but narrow beats advisory but broad.</strong> New guards bind new work from day one and grandfather the old, one file at a time.</li>
-          <li><strong>Cheap checks first.</strong> Lint before the database suite, the suite before the build, code review before a browser session.</li>
-          <li><strong>A skipped test is not a passing test.</strong> Report passes, skips and failures separately, every time.</li>
-          <li><strong>Prove the guard can fail.</strong> Break the code, watch the guard go red, restore. A guard that has never been red has never been tested.</li>
-          <li><strong>A process exception is not a judgement exception.</strong> "Ship it yourself overnight" removes the wait between steps, not the owner's decisions.</li>
-        </ul>
+      <div class="proof" aria-label="Project numbers">
+        <span>Learned building a multi-tenant B2B SaaS</span>
+        <span><b>956</b> commits</span>
+        <span><b>80</b> lessons logged</span>
+        <span><b>30</b> guard tests</span>
+        <span>MIT licensed</span>
       </div>
     </div>
   </section>
@@ -187,29 +103,3 @@
     <p>MIT licensed. Not affiliated with or endorsed by Anthropic. Claude and Claude Code are products of Anthropic.</p>
   </div>
 </footer>
-
-<script>
-  document.querySelectorAll("[data-copy]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var el = document.getElementById(btn.getAttribute("data-copy"));
-      var text = el.textContent;
-      function done(label) {
-        btn.textContent = label;
-        setTimeout(function () { btn.textContent = "Copy"; }, 1600);
-      }
-      function select() {
-        var range = document.createRange();
-        range.selectNodeContents(el);
-        var sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-        done("Selected");
-      }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(function () { done("Copied"); }, select);
-      } else {
-        select();
-      }
-    });
-  });
-</script>
