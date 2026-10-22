@@ -1,0 +1,282 @@
+<title>Claude Code Starter Guide</title>
+<meta name="description" content="A beginner's first hour with Claude Code: rules, a lessons log, a first guard, plans and reviews, built step by step from an empty project.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap">
+<!--css:base-->
+<style>
+  /* Start page: a numbered sequence of steps, each with a time box, what to copy, and a check. */
+  .jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+  .jump a { font-size: 14px; text-decoration: none; color: var(--ink); border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 5px 13px; }
+  .jump a:hover { border-color: var(--clay); color: var(--clay); }
+
+  .need { margin-top: 26px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .need div { min-width: 0; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; font-size: 15px; color: var(--muted); }
+  .need b { display: block; color: var(--ink); font-weight: 600; margin-bottom: 4px; }
+
+  .step { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 8px 24px; padding-block: 48px 8px; border-top: 1px solid var(--line); margin-top: 48px; scroll-margin-top: 16px; }
+  .step:first-of-type { margin-top: 32px; }
+  .step .num { font-family: var(--font-display); font-size: 46px; line-height: 1; color: var(--clay); font-variant-numeric: tabular-nums; }
+  .step .body { min-width: 0; max-width: 68ch; }
+  .step h2 { font-size: clamp(26px, 3vw, 32px); }
+  .time { display: inline-block; margin-top: 10px; font-size: 13px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; }
+  .step p { margin: 16px 0 0; }
+  .step ul { margin: 12px 0 0; padding-left: 20px; }
+  .step li { margin-top: 6px; }
+
+  pre.code { margin: 18px 0 0; background: var(--term); color: var(--tink); border-radius: 12px; padding: 16px 20px; font: 13.5px/1.7 var(--font-mono); overflow-x: auto; }
+  pre.code .c { color: var(--tmuted); }
+  pre.code .k { color: var(--clay); }
+
+  .check { margin-top: 20px; background: var(--surface); border-radius: 12px; padding: 16px 20px; font-size: 15px; }
+  .check b { display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); margin-bottom: 6px; }
+  .check q { font-family: var(--font-mono); font-size: 14px; quotes: none; }
+
+  .why { margin-top: 18px; font-size: 15px; color: var(--muted); }
+
+  .done { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 10px; max-width: 68ch; }
+  .done label { display: flex; gap: 12px; align-items: flex-start; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; cursor: pointer; }
+  .done input { margin-top: 5px; accent-color: var(--clay); width: 16px; height: 16px; flex: none; }
+  .done input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line); }
+  .progress { margin-top: 14px; font-size: 14px; color: var(--muted); }
+
+  @media (max-width: 640px) {
+    .step { grid-template-columns: minmax(0, 1fr); }
+    .step .num { font-size: 36px; }
+  }
+</style>
+<!--/head-->
+
+<header class="bar">
+  <div class="frame">
+    <a class="mark" href="./">Claude Code <span>Playbook</span></a>
+    <nav aria-label="Links">
+      <a href="./">Playbook</a>
+      <a href="start.html" aria-current="page" style="color:var(--ink)">Start here</a>
+      <a href="https://github.com/mahi9119/claude-code-playbook">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="frame" style="grid-template-columns:minmax(0,1fr)">
+      <div class="read">
+        <p class="eyebrow">Start here</p>
+        <h1>Your first hour with the playbook.</h1>
+        <p class="lede" style="max-width:52ch">New to Claude Code? Build the core of this playbook into your own project in six short steps. Each one gives you something to copy and a way to check that it worked.</p>
+        <nav class="jump" aria-label="Steps">
+          <a href="#step-1">1 Rules</a>
+          <a href="#step-2">2 Lessons log</a>
+          <a href="#step-3">3 First guard</a>
+          <a href="#step-4">4 Plans</a>
+          <a href="#step-5">5 Reviews</a>
+          <a href="#step-6">6 Level up</a>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="frame">
+      <div class="read">
+        <h2 style="font-size:26px">Before you start</h2>
+      </div>
+      <div class="need">
+        <div><b>Claude Code installed</b>Follow the official <a href="https://code.claude.com/docs/en/quickstart">quickstart</a>. Ten minutes if you have never used it.</div>
+        <div><b>A project in git</b>Any language. A fresh folder with <code>git init</code> works fine for practice.</div>
+        <div><b>Node 18 or newer</b>The small scripts in the starter kit are plain Node, so they run on macOS, Linux and Windows.</div>
+      </div>
+      <p class="sub" style="margin-top:18px;max-width:68ch">Get the starter kit once. The commands below work in macOS and Linux terminals and in Git Bash on Windows. Run them from your project folder.</p>
+      <div class="cmds">
+        <div class="cmd"><code id="cmd-get">git clone https://github.com/mahi9119/claude-code-playbook.git ../claude-code-playbook</code><button type="button" data-copy="cmd-get">Copy</button></div>
+      </div>
+
+      <article class="step" id="step-1">
+        <div class="num">1</div>
+        <div class="body">
+          <h2>Give Claude a short set of rules</h2>
+          <span class="time">15 minutes</span>
+          <p>Claude Code reads a file called <code>CLAUDE.md</code> in your project at the start of every session. It is the one place to tell Claude how your project works and how you want it to work with you. Start small. Twenty lines you mean beat two hundred you copied.</p>
+          <div class="cmds">
+            <div class="cmd"><code id="cmd-1">cp ../claude-code-playbook/starter/CLAUDE.md ./CLAUDE.md</code><button type="button" data-copy="cmd-1">Copy</button></div>
+          </div>
+          <p>Open it and fill in the parts in <code>&lt;angle brackets&gt;</code>: what the project is, and the commands to run and test it. Leave "Rules for this codebase" almost empty. It fills up as Claude makes mistakes. You can also run <code>/init</code> inside Claude Code to have it draft one from your code, then cut it down to the same shape. More in the docs on <a href="https://code.claude.com/docs/en/memory">CLAUDE.md files</a>.</p>
+          <div class="check"><b>Check it worked</b>Start Claude Code in the project and ask: <q>What are the rules for this project?</q> It should repeat yours back.</div>
+        </div>
+      </article>
+
+      <article class="step" id="step-2">
+        <div class="num">2</div>
+        <div class="body">
+          <h2>Start a lessons log Claude reads every session</h2>
+          <span class="time">10 minutes</span>
+          <p>Claude does not remember yesterday's session. So when it makes a mistake, write the lesson down once, in a file, and have it read automatically every time a session starts. That is what a <a href="https://code.claude.com/docs/en/hooks-guide">hook</a> is for: a command Claude Code runs at a fixed moment. Whatever a session-start hook prints, Claude reads.</p>
+          <div class="cmds">
+            <div class="cmd"><code id="cmd-2a">mkdir -p docs scripts .claude</code><button type="button" data-copy="cmd-2a">Copy</button></div>
+            <div class="cmd"><code id="cmd-2b">cp ../claude-code-playbook/starter/docs/lessons.md docs/ &amp;&amp; cp ../claude-code-playbook/starter/scripts/show-lessons.mjs scripts/</code><button type="button" data-copy="cmd-2b">Copy</button></div>
+            <div class="cmd"><code id="cmd-2c">cp ../claude-code-playbook/starter/.claude/settings.json .claude/</code><button type="button" data-copy="cmd-2c">Copy</button></div>
+          </div>
+          <p>If you already have a <code>.claude/settings.json</code>, do not overwrite it. Open the starter's copy and paste its <code>"hooks"</code> block into yours. The hook is only this:</p>
+<pre class="code"><span class="c">// .claude/settings.json</span>
+{ <span class="k">"hooks"</span>: { <span class="k">"SessionStart"</span>: [ { <span class="k">"hooks"</span>: [
+  { <span class="k">"type"</span>: "command", <span class="k">"command"</span>: "node scripts/show-lessons.mjs" }
+] } ] } }</pre>
+          <p>The lessons file comes with one example entry, so you can see the shape. Replace it with your own when the first real mistake happens.</p>
+          <div class="check"><b>Check it worked</b>Run <code>node scripts/show-lessons.mjs</code> and you should see the table. Then start a new Claude session and ask: <q>Which lessons were you given at startup?</q></div>
+        </div>
+      </article>
+
+      <article class="step" id="step-3">
+        <div class="num">3</div>
+        <div class="body">
+          <h2>Turn your first mistake into a guard</h2>
+          <span class="time">20 minutes</span>
+          <p>A lesson someone has to remember is a reminder. A script that fails when the mistake comes back is a guard. Guards are the heart of this playbook, because they work even when nobody remembers. The starter's example guard catches debug <code>console.log</code> lines left in <code>src/</code>.</p>
+          <div class="cmds">
+            <div class="cmd"><code id="cmd-3a">cp ../claude-code-playbook/starter/scripts/check-no-debug-logs.mjs scripts/</code><button type="button" data-copy="cmd-3a">Copy</button></div>
+          </div>
+          <p>Add it to the <code>scripts</code> section of your <code>package.json</code>, so one command runs every check:</p>
+<pre class="code"><span class="k">"check"</span>: "node scripts/check-no-debug-logs.mjs"</pre>
+          <p>Now prove it can fail. This is the step people skip, and a guard that has never been red has never been tested.</p>
+          <ul>
+            <li>Add <code>console.log("test")</code> to any file in <code>src/</code>.</li>
+            <li>Run <code>npm run check</code>. It should print <code>FAIL</code> with the file and line, and exit with an error.</li>
+            <li>Remove the line and run it again. It should print <code>OK</code>.</li>
+          </ul>
+          <p>Not using JavaScript? Keep the idea and change the details: the folder, the file extensions, and the pattern are three settings at the top of the script.</p>
+          <div class="why"><b>The rule from here on:</b> every lesson in your log names the guard that now enforces it, or says <code>judgment</code> and explains why no check is possible. When a <code>judgment</code> lesson happens a second time, build its guard.</div>
+        </div>
+      </article>
+
+      <article class="step" id="step-4">
+        <div class="num">4</div>
+        <div class="body">
+          <h2>Plan before you build</h2>
+          <span class="time">A habit, not a setup</span>
+          <p>For anything bigger than a small fix, ask Claude for a plan before any file changes. In the terminal, press <code>Shift+Tab</code> to switch to plan mode, describe what you want, and read the plan before you approve it. It is far cheaper to fix a wrong plan than wrong code.</p>
+          <p>Ask for one thing in every plan: a <strong>Verification</strong> section written as checkboxes, not a numbered list.</p>
+<pre class="code">## Verification
+- [ ] Tests pass, with the count shown
+- [ ] The new page works in the browser
+- [ ] Error message shown when the form is empty</pre>
+          <p>A checkbox has a state you can see. A numbered list does not, and that is exactly how a planned feature quietly never gets built. Tick each box only with the evidence written next to it.</p>
+          <div class="check"><b>Try it</b>Ask: <q>Plan this change. End the plan with a Verification section of checkboxes.</q></div>
+        </div>
+      </article>
+
+      <article class="step" id="step-5">
+        <div class="num">5</div>
+        <div class="body">
+          <h2>Get a second opinion before you commit</h2>
+          <span class="time">5 minutes each time</span>
+          <p>The session that wrote the code is the worst reviewer of it, because it already believes the code is right. Before committing anything that matters, open a <strong>new</strong> session and ask it to review the change:</p>
+          <div class="check"><b>Paste into a fresh session</b><q>Review my uncommitted changes for bugs. Try unusual inputs: empty values, very large numbers, dates at month end. Do not edit any files.</q></div>
+          <p>When you want this on demand, copy the playbook's reviewer into your project as a <a href="https://code.claude.com/docs/en/sub-agents">subagent</a>. Claude then runs it in its own fresh context whenever you ask for a review.</p>
+          <div class="cmds">
+            <div class="cmd"><code id="cmd-5">mkdir -p .claude/agents &amp;&amp; cp ../claude-code-playbook/agents/tier2-reviewer.md .claude/agents/</code><button type="button" data-copy="cmd-5">Copy</button></div>
+          </div>
+          <p>Edit the line in its first paragraph that describes your project, and it is ready.</p>
+        </div>
+      </article>
+
+      <article class="step" id="step-6">
+        <div class="num">6</div>
+        <div class="body">
+          <h2>Level up when something hurts</h2>
+          <span class="time">Whenever you need it</span>
+          <p>Do not install the rest of the playbook on day one. Each piece exists because of a specific failure. Add it when you hit that failure yourself:</p>
+        </div>
+      </article>
+      <div class="table-wrap" style="margin-top:20px">
+        <table>
+          <thead><tr><th>When this happens</th><th>Reach for</th></tr></thead>
+          <tbody>
+            <tr><td class="r">You keep correcting Claude on the same project rules</td><td class="why" style="margin:0">The full <a href="https://github.com/mahi9119/claude-code-playbook/blob/main/templates/CLAUDE.md">CLAUDE.md template</a>. Copy only the sections that match your pain.</td></tr>
+            <tr><td class="r">Bugs around dates, money, or two things happening at once</td><td class="why" style="margin:0">The <a href="https://github.com/mahi9119/claude-code-playbook/blob/main/templates/plan.md">plan template</a> and its table of hostile inputs</td></tr>
+            <tr><td class="r">A feature was planned but part of it never got built</td><td class="why" style="margin:0">The <a href="https://github.com/mahi9119/claude-code-playbook/blob/main/guards/check-plan-drift.mjs">plan-drift guard</a></td></tr>
+            <tr><td class="r">You make the same architectural argument twice</td><td class="why" style="margin:0">A <a href="https://github.com/mahi9119/claude-code-playbook/blob/main/templates/decisions.md">decisions log</a>, shown at session start like the lessons</td></tr>
+            <tr><td class="r">Claude commits or pushes before your checks run</td><td class="why" style="margin:0">The <a href="https://github.com/mahi9119/claude-code-playbook/blob/main/hooks/block-git-write.mjs">git-write block hook</a> and one release script</td></tr>
+            <tr><td class="r">You want work to continue while you are away</td><td class="why" style="margin:0">The <a href="https://github.com/mahi9119/claude-code-playbook/blob/main/skills/overnight-close/SKILL.md">overnight skill</a> and its table of decisions it must not make</td></tr>
+            <tr><td class="r">You are about to install a new tool, skill or MCP server</td><td class="why" style="margin:0">The six-point vetting check in the <a href="https://github.com/mahi9119/claude-code-playbook/blob/main/templates/CLAUDE.md">CLAUDE.md template</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="read" style="margin-top:72px">
+        <p class="eyebrow">Your checklist</p>
+        <h2>You are set up when all of these are true.</h2>
+      </div>
+      <ul class="done" id="done">
+        <li><label><input type="checkbox" id="d1"><span>Claude repeats your project rules back when asked</span></label></li>
+        <li><label><input type="checkbox" id="d2"><span>A new session sees your lessons index at startup</span></label></li>
+        <li><label><input type="checkbox" id="d3"><span>You watched your first guard fail, then pass</span></label></li>
+        <li><label><input type="checkbox" id="d4"><span>Your last non-trivial change started from a plan with checkbox verification</span></label></li>
+        <li><label><input type="checkbox" id="d5"><span>A fresh session reviewed your last change before you committed it</span></label></li>
+        <li><label><input type="checkbox" id="d6"><span>Your lessons log has one real entry of your own</span></label></li>
+      </ul>
+      <p class="progress" id="progress" aria-live="polite">0 of 6 done. Ticks are saved in this browser only.</p>
+
+      <div class="read" style="margin-top:56px">
+        <p class="sub">Then read the <a href="./">full playbook</a> to see where this leads after six months and 956 commits, and the <a href="https://github.com/mahi9119/claude-code-playbook/tree/main/stories">twelve incident stories</a> behind its rules.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="frame">
+    <p>Written by Mahendar Mali. <a href="https://www.linkedin.com/in/mahendar-mali">LinkedIn</a> · <a href="https://github.com/mahi9119/claude-code-playbook">GitHub</a></p>
+    <p>MIT licensed. Not affiliated with or endorsed by Anthropic. Claude and Claude Code are products of Anthropic.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll("[data-copy]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var el = document.getElementById(btn.getAttribute("data-copy"));
+      var text = el.textContent;
+      function done(label) {
+        btn.textContent = label;
+        setTimeout(function () { btn.textContent = "Copy"; }, 1600);
+      }
+      function select() {
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        done("Selected");
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { done("Copied"); }, select);
+      } else {
+        select();
+      }
+    });
+  });
+
+  (function () {
+    var KEY = "ccp-start-checklist";
+    var boxes = Array.prototype.slice.call(document.querySelectorAll("#done input"));
+    var out = document.getElementById("progress");
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { saved = {}; }
+    function render() {
+      var n = boxes.filter(function (b) { return b.checked; }).length;
+      out.textContent = n === boxes.length
+        ? "All 6 done. You have the core of the playbook running."
+        : n + " of 6 done. Ticks are saved in this browser only.";
+    }
+    boxes.forEach(function (b) {
+      b.checked = !!saved[b.id];
+      b.addEventListener("change", function () {
+        saved[b.id] = b.checked;
+        try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+        render();
+      });
+    });
+    render();
+  })();
+</script>

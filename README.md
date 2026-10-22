@@ -14,6 +14,10 @@ own project.
 
 **Live write-up:** [mahi9119.github.io/claude-code-playbook](https://mahi9119.github.io/claude-code-playbook/)
 
+**New to Claude Code?** Start with the [beginner guide](https://mahi9119.github.io/claude-code-playbook/start.html):
+six steps from an empty project to rules, a lessons log, a first guard, plans and reviews, using
+the small files in [`starter/`](starter).
+
 ---
 
 ## The numbers
@@ -94,6 +98,7 @@ written next to the rule in the constitution so nobody "simplifies" the rule awa
 
 ```
 claude-code-playbook/
+├── starter/                 Beginner kit: short CLAUDE.md, lessons log, session hook, first guard
 ├── templates/
 │   ├── CLAUDE.md            The constitution: every rule with the reason it exists
 │   ├── plan.md              Plan file shape: summary table, invariant table, checkbox verification
@@ -117,7 +122,8 @@ claude-code-playbook/
 ├── stories/
 │   └── README.md            Twelve incidents and the guards they produced
 ├── site/
-│   └── index.html           The write-up, served by GitHub Pages
+│   ├── index.html           The write-up, served by GitHub Pages
+│   └── start.html           The beginner guide
 └── MAINTAINING.md           Decisions, content rules, and how to refresh the numbers and site
 ```
 

@@ -60,9 +60,12 @@ footers.
 
 ## D-07 Site deployment
 
-- Source: `site/index.html`, a page fragment. The diagrams live in `assets/*.svg`.
-- Build: `node scripts/build-site.mjs` writes `_site/index.html`. It inlines the diagrams so they
-  follow the page's light and dark theme. `_site/` is gitignored.
+- Source: every `site/*.html` is a page fragment (`index.html` is the playbook, `start.html` the
+  beginner guide). Shared styles live once in `site/base.css`; the diagrams live in `assets/*.svg`.
+- Build: `node scripts/build-site.mjs` writes `_site/<page>.html`. It inlines `base.css` and the
+  diagrams, so the diagrams follow the page's light and dark theme. `_site/` is gitignored.
+- The beginner guide walks through `starter/`. If a starter file changes, check the guide's copy
+  commands and code snippets still match it.
 - Deploy: `.github/workflows/pages.yml` runs on pushes to `main` that touch `site/`, `assets/`, the
   build script or the workflow, and on manual dispatch:
 
