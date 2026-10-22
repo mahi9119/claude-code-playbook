@@ -1,0 +1,41 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'LESSONS INDEX (from docs/lessons.md). If any row matches this session'\"'\"'s task area, read the full entry before acting:' && sed -n '/LESSONS-INDEX-START/,/LESSONS-INDEX-END/p' docs/lessons.md"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'ACTIVE DECISIONS (from docs/decisions.md). Before changing or reverting a pattern that looks odd, check whether an active ADR explains why it exists:' && sed -n '/## SUMMARY/,/^---$/p' docs/decisions.md"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node scripts/hooks/block-git-write.mjs"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "ask": [
+      "Bash(rm *)",
+      "Bash(git clean*)",
+      "Bash(git reset --hard*)",
+      "Bash(git checkout -- *)"
+    ]
+  }
+}

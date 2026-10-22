@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" role="img" aria-labelledby="t d">
+  <title id="t">The loop: incident, lesson, guard, repeat blocked</title>
+  <desc id="d">Every incident becomes a lesson logged the same turn. A lesson either names a guard that blocks the repeat, or is marked judgment and injected into every new session by a session-start hook. A judgment lesson that recurs twice becomes a build task for its guard.</desc>
+  <style>
+    :root { --bg:#FAF9F5; --card:#FFFFFF; --line:#E2DED2; --ink:#141413; --muted:#6B6A64; --clay:#D97757; --clayfill:#F6E4DC; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#262624; --card:#30302E; --line:#4A4943; --ink:#F5F4EE; --muted:#A8A69E; --clay:#E08A6D; --clayfill:#4A3129; }
+    }
+    .serif { font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif; }
+    .sans { font-family: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/>
+    </marker>
+    <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--clay)"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="470" rx="20" fill="var(--bg)"/>
+  <rect x="0.5" y="0.5" width="959" height="469" rx="20" fill="none" stroke="var(--line)"/>
+
+  <text x="40" y="54" class="sans" font-size="13" letter-spacing="1.8" font-weight="600" fill="var(--clay)">EVERY MISTAKE TAKES THE SAME PATH</text>
+
+  <g class="sans">
+    <rect x="40" y="90" width="190" height="112" rx="12" fill="var(--card)" stroke="var(--line)"/>
+    <text x="60" y="122" font-size="12" fill="var(--muted)">1</text>
+    <text x="60" y="150" class="serif" font-size="22" fill="var(--ink)">Incident</text>
+    <text x="60" y="176" font-size="13" fill="var(--muted)">Something breaks,</text>
+    <text x="60" y="193" font-size="13" fill="var(--muted)">or nearly does</text>
+
+    <rect x="270" y="90" width="190" height="112" rx="12" fill="var(--card)" stroke="var(--line)"/>
+    <text x="290" y="122" font-size="12" fill="var(--muted)">2</text>
+    <text x="290" y="150" class="serif" font-size="22" fill="var(--ink)">Lesson</text>
+    <text x="290" y="176" font-size="13" fill="var(--muted)">Logged the same turn,</text>
+    <text x="290" y="193" font-size="13" fill="var(--muted)">must name its guard</text>
+
+    <rect x="500" y="90" width="190" height="112" rx="12" fill="var(--clayfill)" stroke="var(--clay)"/>
+    <text x="520" y="122" font-size="12" fill="var(--clay)">3</text>
+    <text x="520" y="150" class="serif" font-size="22" fill="var(--ink)">Guard</text>
+    <text x="520" y="176" font-size="13" fill="var(--ink)">Test, script or hook</text>
+    <text x="520" y="193" font-size="13" fill="var(--ink)">that fails on a repeat</text>
+
+    <rect x="730" y="90" width="190" height="112" rx="12" fill="var(--card)" stroke="var(--line)"/>
+    <text x="750" y="122" font-size="12" fill="var(--muted)">4</text>
+    <text x="750" y="150" class="serif" font-size="22" fill="var(--ink)">Repeat blocked</text>
+    <text x="750" y="176" font-size="13" fill="var(--muted)">The build goes red</text>
+    <text x="750" y="193" font-size="13" fill="var(--muted)">before it ships</text>
+  </g>
+
+  <g stroke="var(--muted)" stroke-width="1.6" fill="none">
+    <line x1="232" y1="146" x2="266" y2="146" marker-end="url(#a)"/>
+    <line x1="462" y1="146" x2="496" y2="146" marker-end="url(#a)"/>
+    <line x1="692" y1="146" x2="726" y2="146" marker-end="url(#a)"/>
+    <line x1="365" y1="204" x2="365" y2="306" stroke-dasharray="5 5" marker-end="url(#a)"/>
+  </g>
+  <line x1="595" y1="308" x2="595" y2="208" stroke="var(--clay)" stroke-width="1.6" stroke-dasharray="5 5" marker-end="url(#ac)"/>
+
+  <g class="sans" font-size="13">
+    <text x="377" y="250" fill="var(--muted)">No guard possible yet:</text>
+    <text x="377" y="268" fill="var(--muted)">marked "judgment"</text>
+    <text x="607" y="250" fill="var(--clay)">Recurs twice:</text>
+    <text x="607" y="268" fill="var(--clay)">build the guard</text>
+  </g>
+
+  <g class="sans">
+    <rect x="270" y="310" width="420" height="84" rx="12" fill="var(--card)" stroke="var(--line)"/>
+    <text x="290" y="344" class="serif" font-size="20" fill="var(--ink)">Session-start hook</text>
+    <text x="290" y="370" font-size="13" fill="var(--muted)">Injects the lesson index into every new Claude session</text>
+  </g>
+
+  <text x="40" y="434" class="sans" font-size="13" fill="var(--muted)">Rewording a lesson that recurred does not count as fixing it. 46 of 80 lessons are now enforced mechanically.</text>
+</svg>

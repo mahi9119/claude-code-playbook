@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="t d">
+  <title id="t">From diff to production</title>
+  <desc id="d">Checks run cheapest first: lint, typecheck, guards, then database-backed tests, then the Tier 1 code review. A Tier 2 fresh-context review runs only when the diff touches money, dates, state machines, permissions, concurrency or 10 plus files. A migration review runs only when a migration changed. Then one release script migrates, commits and pushes.</desc>
+  <style>
+    :root { --bg:#FAF9F5; --card:#FFFFFF; --line:#E2DED2; --ink:#141413; --muted:#6B6A64; --clay:#D97757; --clayfill:#F6E4DC; --track:#E9E5DA; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#262624; --card:#30302E; --line:#4A4943; --ink:#F5F4EE; --muted:#A8A69E; --clay:#E08A6D; --clayfill:#4A3129; --track:#3A3936; }
+    }
+    .serif { font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif; }
+    .sans { font-family: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/>
+    </marker>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="var(--track)"/>
+      <stop offset="1" stop-color="var(--clay)"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="960" height="400" rx="20" fill="var(--bg)"/>
+  <rect x="0.5" y="0.5" width="959" height="399" rx="20" fill="none" stroke="var(--line)"/>
+
+  <text x="40" y="54" class="sans" font-size="13" letter-spacing="1.8" font-weight="600" fill="var(--clay)">FROM DIFF TO PRODUCTION</text>
+
+  <rect x="40" y="76" width="880" height="6" rx="3" fill="url(#g)"/>
+  <text x="40" y="104" class="sans" font-size="12" fill="var(--muted)">Cheapest, runs on every change</text>
+  <text x="920" y="104" class="sans" font-size="12" fill="var(--clay)" text-anchor="end">Most expensive, runs only when needed</text>
+
+  <g class="sans">
+    <rect x="40" y="128" width="150" height="88" rx="12" fill="var(--card)" stroke="var(--line)"/>
+    <text x="58" y="160" class="serif" font-size="18" fill="var(--ink)">Static checks</text>
+    <text x="58" y="184" font-size="12" fill="var(--muted)">lint, format,</text>
+    <text x="58" y="200" font-size="12" fill="var(--muted)">typecheck</text>
+
+    <rect x="214" y="128" width="150" height="88" rx="12" fill="var(--card)" stroke="var(--line)"/>
+    <text x="232" y="160" class="serif" font-size="18" fill="var(--ink)">Guards</text>
+    <text x="232" y="184" font-size="12" fill="var(--muted)">plan drift, doc tables,</text>
+    <text x="232" y="200" font-size="12" fill="var(--muted)">schema drift</text>
+
+    <rect x="388" y="128" width="150" height="88" rx="12" fill="var(--card)" stroke="var(--line)"/>
+    <text x="406" y="160" class="serif" font-size="18" fill="var(--ink)">Tests</text>
+    <text x="406" y="184" font-size="12" fill="var(--muted)">real database loaded,</text>
+    <text x="406" y="200" font-size="12" fill="var(--muted)">skips counted as gaps</text>
+
+    <rect x="562" y="128" width="150" height="88" rx="12" fill="var(--card)" stroke="var(--line)"/>
+    <text x="580" y="160" class="serif" font-size="18" fill="var(--ink)">Tier 1 review</text>
+    <text x="580" y="184" font-size="12" fill="var(--muted)">/code-review on</text>
+    <text x="580" y="200" font-size="12" fill="var(--muted)">every ship</text>
+
+    <rect x="770" y="128" width="150" height="88" rx="12" fill="var(--ink)"/>
+    <text x="788" y="160" class="serif" font-size="18" fill="var(--bg)">Ship script</text>
+    <text x="788" y="184" font-size="12" fill="var(--bg)" fill-opacity="0.75">migrate, commit, push.</text>
+    <text x="788" y="200" font-size="12" fill="var(--bg)" fill-opacity="0.75">The only way out.</text>
+  </g>
+
+  <g stroke="var(--muted)" stroke-width="1.6" fill="none">
+    <line x1="192" y1="172" x2="210" y2="172" marker-end="url(#a)"/>
+    <line x1="366" y1="172" x2="384" y2="172" marker-end="url(#a)"/>
+    <line x1="540" y1="172" x2="558" y2="172" marker-end="url(#a)"/>
+    <line x1="714" y1="172" x2="766" y2="172" marker-end="url(#a)"/>
+    <path d="M637 218 V260" stroke-dasharray="5 5"/>
+    <path d="M740 296 H845 V220" stroke-dasharray="5 5" marker-end="url(#a)"/>
+  </g>
+
+  <g class="sans">
+    <rect x="388" y="262" width="350" height="98" rx="12" fill="var(--clayfill)" stroke="var(--clay)"/>
+    <text x="406" y="290" class="serif" font-size="17" fill="var(--ink)">Only when the diff calls for it</text>
+    <text x="406" y="314" font-size="12" fill="var(--ink)">Tier 2: fresh-context reviewer on a stronger model,</text>
+    <text x="406" y="331" font-size="12" fill="var(--ink)">driven by the plan's invariant table as a hunt list</text>
+    <text x="406" y="350" font-size="12" fill="var(--ink)">Migration review: before the ship command is shared</text>
+  </g>
+  <text x="40" y="290" class="sans" font-size="12" fill="var(--muted)">Tier 2 triggers: money, dates,</text>
+  <text x="40" y="307" class="sans" font-size="12" fill="var(--muted)">state machines, permissions,</text>
+  <text x="40" y="324" class="sans" font-size="12" fill="var(--muted)">concurrency, or 10+ files.</text>
+  <text x="40" y="350" class="sans" font-size="12" fill="var(--muted)">A hook blocks the agent from git commit.</text>
+</svg>
