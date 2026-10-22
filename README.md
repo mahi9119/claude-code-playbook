@@ -116,8 +116,9 @@ claude-code-playbook/
 │   └── check-doc-tables.mjs Tracking docs must open with a summary, tables must align
 ├── stories/
 │   └── README.md            Twelve incidents and the guards they produced
-└── site/
-    └── index.html           The write-up, served by GitHub Pages
+├── site/
+│   └── index.html           The write-up, served by GitHub Pages
+└── MAINTAINING.md           Decisions, content rules, and how to refresh the numbers and site
 ```
 
 ---
