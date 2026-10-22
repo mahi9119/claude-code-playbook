@@ -13,9 +13,9 @@
     --tink: #E8E6DC;
     --tmuted: #9A988F;
     --ok: #6E9A5B;
-    --font-display: "Source Serif 4", Georgia, "Iowan Old Style", "Times New Roman", serif;
-    --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --font-display: "Geist", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-body: "Geist", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -66,8 +66,8 @@
   /* Hero */
   .hero .frame { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 56px; align-items: center; padding-block: 72px 56px; }
   .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--clay); margin: 0 0 18px; }
-  h1, h2, h3 { font-family: var(--font-display); font-weight: 500; text-wrap: balance; margin: 0; }
-  h1 { font-size: clamp(42px, 6vw, 68px); line-height: 1.04; letter-spacing: -0.015em; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(42px, 6vw, 68px); line-height: 1.04; letter-spacing: -0.035em; }
   .lede { font-size: 20px; line-height: 1.55; color: var(--muted); margin: 22px 0 0; max-width: 34ch; }
   .byline { margin-top: 26px; font-size: 15px; color: var(--muted); }
   .byline strong { color: var(--ink); font-weight: 600; }

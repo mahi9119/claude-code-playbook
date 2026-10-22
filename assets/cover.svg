@@ -6,15 +6,15 @@
     @media (prefers-color-scheme: dark) {
       :root { --bg:#262624; --card:#30302E; --line:#45443F; --ink:#F5F4EE; --muted:#A8A69E; --clay:#E08A6D; --term:#141413; --tink:#E8E6DC; --tmuted:#8C8A82; --ok:#8DB27A; }
     }
-    .serif { font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif; }
+    .serif { font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; font-weight: 600; letter-spacing: -0.01em; }
     .sans { font-family: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
-    .mono { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+    .mono { font-family: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
   </style>
   <rect x="0" y="0" width="1280" height="420" rx="24" fill="var(--bg)"/>
   <rect x="0.5" y="0.5" width="1279" height="419" rx="24" fill="none" stroke="var(--line)"/>
 
   <text x="64" y="92" class="sans" font-size="14" letter-spacing="2.2" font-weight="600" fill="var(--clay)">CLAUDE CODE PLAYBOOK</text>
-  <text x="64" y="168" class="serif" font-size="58" fill="var(--ink)">Guards over reminders.</text>
+  <text x="64" y="168" class="serif" font-size="52" fill="var(--ink)">Guards over reminders.</text>
   <text x="64" y="214" class="sans" font-size="20" fill="var(--muted)">How a small team shipped a production financial</text>
   <text x="64" y="242" class="sans" font-size="20" fill="var(--muted)">platform with Claude Code, without trusting memory.</text>
 
